@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import User from "./components/User";
 
 
 const App = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(()=>{
-    const url = `http://localhost:5000/users`
-    fetch(url)
+
+    fetch(`http://localhost:5000/users`)
     .then(res => res.json())
     .then(data => setUsers(data))
     
@@ -36,7 +37,7 @@ const App = () => {
 
   return (
     <main className="max-w-4xl mx-auto mt-5">
-     <div className="text-center">
+     <div className="text-center my-5">
       <form onSubmit={handleSubmit}>
       <input type="text" name="name" className="border border-purple-400" id="" required/>
       <br />
@@ -46,10 +47,16 @@ const App = () => {
       </form>
      </div>
 
-      <section className="text-center">
-      <h2 className="text-3xl font-bold text-orange-500">Main content Are Coming here: {users.length}</h2>
-      <div>
-      {users.map(user => <p key={user.id}>{user.name} {user.email}</p> )}
+     <hr />
+
+      <section>
+      <h2 className="text-2xl font-bold text-orange-500 text-center">Users: {users.length}</h2>
+      <div className="p-5">
+      {users.map((user, idx) => <User
+        key={user._id}
+        user={user}
+        idx={idx}
+        ></User>)}
       </div>
       </section>
     </main>
