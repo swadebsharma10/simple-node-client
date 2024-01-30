@@ -4,10 +4,11 @@ import User from "./components/User";
 
 const App = () => {
   const [users, setUsers] = useState([]);
+  console.log(users)
 
   useEffect(()=>{
 
-    fetch(`http://localhost:5000/users`)
+    fetch(`https://simple-node-server-six.vercel.app/users`)
     .then(res => res.json())
     .then(data => setUsers(data))
     
@@ -19,7 +20,7 @@ const App = () => {
     const name = event.target.name.value;
     const email = event.target.email.value;
     const user ={name, email}
-    fetch('http://localhost:5000/users',{
+    fetch('https://simple-node-server-six.vercel.app/users',{
       method:'POST',
       headers:{
         'content-type': 'application/json'
@@ -37,6 +38,7 @@ const App = () => {
 
   return (
     <main className="max-w-4xl mx-auto mt-5">
+    <h2 className="text-center text-2xl font-bold">Simple CRUD Operation With MongoDB</h2>
      <div className="text-center my-5">
       <form onSubmit={handleSubmit}>
       <input type="text" name="name" className="border border-purple-400" id="" required/>
@@ -51,7 +53,7 @@ const App = () => {
 
       <section>
       <h2 className="text-2xl font-bold text-orange-500 text-center">Users: {users.length}</h2>
-      <div className="p-5">
+      <div className="p-10">
       {users.map((user, idx) => <User
         key={user._id}
         user={user}
