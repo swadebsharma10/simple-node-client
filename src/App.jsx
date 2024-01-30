@@ -4,7 +4,7 @@ import User from "./components/User";
 
 const App = () => {
   const [users, setUsers] = useState([]);
-  console.log(users)
+  // console.log(users)
 
   useEffect(()=>{
 
